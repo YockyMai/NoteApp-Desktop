@@ -16,10 +16,10 @@ const Header: React.FC<HeaderProps> = ({ register }) => {
 				<Logo />
 				<div className="header__btnBlock">
 					<button className="btn header-btn">
-						<Image src={searchIcon} />
+						<Image src={searchIcon} alt="search" />
 					</button>
 					<button className="btn header-btn">
-						<Image src={settingIcon} />
+						<Image src={settingIcon} alt="setting" />
 					</button>
 				</div>
 			</header>

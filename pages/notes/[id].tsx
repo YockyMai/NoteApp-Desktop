@@ -78,9 +78,8 @@ const NoteEditor: FC<editorProps> = ({}) => {
 					<button onClick={onSaveNote}>Сохранить!</button>
 					<input
 						className="noteColor"
-						ref={noteColor}
-						onChange={() => {
-							setColor(noteColor.current.value);
+						onChange={(e) => {
+							setColor(e.target.value);
 						}}
 						value={color}
 						type="color"
