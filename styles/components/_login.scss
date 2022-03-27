@@ -1,0 +1,245 @@
+@import '../variables';
+
+.loginform {
+	background-color: #1c1c1c;
+	height: 500px;
+	width: 745px;
+	margin: 0 auto;
+	margin-top: 50px;
+	border-radius: 45px;
+	box-shadow: 10px 40px 60px rgba(41, 6, 32, 0.226);
+	position: relative;
+}
+
+.authform {
+	margin-top: 10px;
+	position: absolute;
+	top: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: block;
+}
+
+.input {
+	transition: 0.3s;
+	width: 500px;
+	height: 60px;
+	outline: none;
+	border: none;
+	border-radius: 2em;
+	margin-top: 30px;
+	font-size: 18px;
+	padding: 10px 10px 10px 20px;
+	&:hover {
+		scale: 2;
+		background-color: #252525;
+		color: #fff;
+		transition: 0.3s;
+		transform: scale(1.05);
+	}
+	&:focus {
+		transform: scale(1.05);
+		background-color: #252525;
+		color: #fff;
+		transition: 0.3s;
+	}
+}
+.authContainer {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 50px;
+	.authBtn {
+		background-color: rgba(96, 207, 222, 1);
+		border-radius: 1em;
+		height: 60px;
+		border: none;
+		width: 220px;
+		transition: 0.3s;
+		cursor: pointer;
+		&:hover {
+			scale: 2;
+			transition: 0.3s;
+			transform: scale(1.05);
+		}
+		h2 {
+			font-weight: 900;
+			font-size: 24px;
+		}
+	}
+}
+
+.checkbox {
+	align-items: center;
+	margin-top: 50px;
+	h3 {
+		margin-bottom: 4px;
+	}
+	.slideSwitch {
+		position: relative;
+		display: inline-block;
+		margin: auto 2em;
+		align-items: center;
+		width: 3em;
+		height: 1.5em;
+	}
+
+	.slideSwitch input {
+		opacity: 0;
+		width: 0;
+		height: 1.8em;
+	}
+
+	.slideSwitchSlider {
+		position: absolute;
+		top: -3px;
+		left: -3px;
+		width: 3em;
+		height: 1.5em;
+		cursor: pointer;
+		border: 2px solid;
+		border-color: #eee #ddd #ddd #eee;
+		border-radius: 1em;
+		background-color: $blue;
+		background-color: #fff;
+		-webkit-box-shadow: inset 1px 1px 3px 0px #000,
+			inset -2px -2px 3px 0px rgba(255, 255, 255, 0.3);
+		-moz-box-shadow: inset 1px 1px 3px 0px #000,
+			inset -2px -2px 3px 0px rgba(255, 255, 255, 0.3);
+		-o-box-shadow: inset 1px 1px 3px 0px #000,
+			inset -2px -2px 3px 0px rgba(255, 255, 255, 0.3);
+		box-shadow: inset 1px 1px 3px 0px #000,
+			inset -2px -2px 3px 0px rgba(255, 255, 255, 0.3);
+		-webkit-transition: 0.2s;
+		-moz-transition: 0.2s;
+		-o-transition: 0.2s;
+		transition: 0.2s;
+	}
+
+	.slideSwitchSlider::before {
+		position: absolute;
+		content: '';
+		left: 3px;
+		top: 2.2px;
+		width: 1em;
+		height: 1em;
+		outline: 1px solid #aaa;
+		border-radius: 1em;
+		background-color: $blue;
+		-webkit-transition: 0.4s;
+		-moz-transition: 0.4s;
+		-o-transition: 0.4s;
+		transition: 0.4s;
+	}
+
+	input:checked + .slideSwitchSlider {
+		background-color: $blue;
+	}
+
+	input:checked + .slideSwitchSlider::before {
+		background-color: #fff;
+	}
+
+	input:focus + .slideSwitchSlider::after {
+		border-color: rgba(30, 143, 255, 0.5);
+	}
+
+	input:checked + .slideSwitchSlider:before {
+		-webkit-transform: translateX(1.4em);
+		-moz-transform: translateX(1.4em);
+		-o-transform: translateX(1.4em);
+		transform: translateX(1.4em);
+	}
+
+	input:disabled + .slideSwitchSlider {
+		background-color: #ddd;
+	}
+
+	input:disabled + .slideSwitchSlider::before {
+		background-color: #ddd;
+	}
+}
+
+.container-loader {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translateX(-50%);
+	//variables
+	$bg-color: #fff; //container background-color;
+	$basic-dark-color: #5a5a5a; //color of the spinner
+	$border-width: 4px; //width of spinners border
+	$basic-spinner-dimensions: 125px; //width and height of spinner
+	$main-spinner-dimensions: $basic-spinner-dimensions - $border-width * 2; //width and height of bigger circle
+	$small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of smaller circle
+
+	/* COMMON STYLES: YOU DON'T NEED THEM */
+	body {
+		background-color: $bg-color;
+	}
+
+	/* YOU NEED THESE STYLES */
+
+	/* spinner style */
+	.spinner {
+		position: relative;
+		width: $basic-spinner-dimensions;
+		height: $basic-spinner-dimensions;
+
+		&:before,
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			border-width: 4px;
+			border-style: solid;
+			border-radius: 50%;
+		}
+	}
+
+	/* spinner-1 styles */
+	.spinner.spinner-1 {
+		@keyframes rotate-animation {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		@keyframes anti-rotate-animation {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(-360deg);
+			}
+		}
+
+		&:before {
+			width: $main-spinner-dimensions;
+			height: $main-spinner-dimensions;
+			border-bottom-color: $basic-dark-color;
+			border-right-color: $basic-dark-color;
+			border-top-color: rgba($basic-dark-color, 0);
+			border-left-color: rgba($basic-dark-color, 0);
+			top: 0px;
+			left: 0px;
+			animation: rotate-animation 1s linear 0s infinite;
+		}
+
+		&:after {
+			width: $small-spinner-dimensions;
+			height: $small-spinner-dimensions;
+			border-bottom-color: $basic-dark-color;
+			border-right-color: $basic-dark-color;
+			border-top-color: rgba($basic-dark-color, 0);
+			border-left-color: rgba($basic-dark-color, 0);
+			top: ($main-spinner-dimensions - $small-spinner-dimensions) / 2;
+			left: ($main-spinner-dimensions - $small-spinner-dimensions) / 2;
+			animation: anti-rotate-animation 0.85s linear 0s infinite;
+		}
+	}
+}

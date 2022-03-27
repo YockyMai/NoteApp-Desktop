@@ -1,0 +1,77 @@
+@import './components/all.sass';
+@import './libs/all.sass';
+@import 'variables.sass';
+@import 'mainPage.scss';
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Nunito', sans-serif;
+}
+
+body {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	background-color: $main-color;
+}
+
+a,
+b,
+h1,
+h2,
+h3,
+h4,
+h5 {
+	color: #ffffff;
+	font-family: 'Nunito', sans-serif;
+}
+
+h1 {
+	font-size: 64px;
+}
+
+h2 {
+	font-weight: 600;
+	font-size: 28px;
+	line-height: 30px;
+}
+
+p {
+	color: #3b3b3b;
+	font-size: 25px;
+	font-weight: 600;
+}
+
+a {
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.container {
+	width: 95%;
+	margin: 0 auto;
+}
+
+.btn {
+	border: 0;
+	width: 60px;
+	height: 60px;
+	background-color: $pre-main-color;
+	cursor: pointer;
+	transition: $delay;
+	&:hover {
+		transition: $delay;
+	}
+}
+
+.visible {
+	opacity: 1 !important;
+	visibility: visible !important;
+	transition: $delay;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}

@@ -1,0 +1,264 @@
+@import 'variables';
+
+.taskContainer {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    .task-element {
+        margin-right: 80px;
+        padding: 25px 40px;
+        width: 365px;
+        min-height: 70px;
+        height: 100%;
+        background-color: #FD99FF;
+        border-radius: $radius;
+        margin-top: 50px;
+        position: relative;
+
+        .taskEl--text {
+            width: 270px;
+            font-size: 25px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .task-controlPanel {
+            position: absolute;
+            width: 30px;
+            height: 67px;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            zoom: 1.2; /* all browsers */
+            -moz-transform: scale(1.2); /* Firefox */
+            outline: 0px solid $blue;
+            opacity: 0;
+            transition: $delay;
+            visibility: hidden;
+
+            .task-controlBtn {
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                position: relative;
+
+                &:hover {
+                    outline: 1px solid $blue;
+                }
+            }
+        }
+    }
+}
+
+.add-tusk-btn {
+    border-radius: 50%;
+    box-shadow: -5px 0px 13px 5px rgba(0, 0, 0, 0.27);
+    position: fixed;
+    right: 3%;
+    bottom: 5%;
+    background-color: $main-color !important;
+
+    &:hover {
+        background-color: $active-color !important;
+    }
+}
+
+//*BUTTON HOVER EFFECT*//
+.add-tusk-button{
+    position: fixed;
+    bottom: 5%;
+    right: 3%;
+    zoom: .6;
+    .svg-container {
+        height: 124px;
+        position: relative;
+        width: 124px;
+    }
+
+    .circle {
+        height: 124px;
+        width: 124px;
+
+        .background {
+            fill: transparent;
+            stroke: #EE3769;
+            transition: all 200ms ease;
+        }
+
+        .foreground {
+            fill: transparent;
+            stroke-dasharray: 377;
+            stroke-dashoffset: 377;
+            stroke: #1abc9c;
+            transform-origin: 50% 50%;
+            transform: rotate(-270deg);
+            transition: all 800ms ease;
+        }
+
+        .line {
+            stroke-width: 2;
+            stroke: #EE3769;
+            transform-origin: 50% 50%;
+            transition: all 500ms ease;
+        }
+
+        .line2 {
+            transform: rotate(-90deg);
+        }
+
+        &:hover {
+            cursor: pointer;
+
+            .background {
+                stroke: transparent;
+            }
+
+            .foreground {
+                stroke-dashoffset: 0;
+                transform: rotate(-90deg);
+            }
+
+            .line {
+                stroke: #1abc9c;
+            }
+        }
+    }
+}
+
+
+
+//** WELCOME BLOCK **//
+.welcome-block-container{
+    width: 90%;
+    margin: 0 auto;
+}
+.welcome-block{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    p {
+        color: $red;
+        font-family: Avenir Next, Helvetica Neue, Helvetica, Tahoma, sans-serif;
+        font-size: .5em;
+        font-weight: 700;
+    }
+    p span {
+        display: inline-block;
+        position: relative;
+        transform-style: preserve-3d;
+        perspective: 50;
+        -webkit-font-smoothing: antialiased;
+    }
+    p span::before,
+    p span::after {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: -1px;
+        transform-origin: left top;
+        transition: all ease-out 0.3s;
+        content: attr(data-text);
+    }
+    p span::before {
+        z-index: 1;
+        color: rgba(0,0,0,0.2);
+        transform: scale(1.1, 1) skew(0deg, 20deg);
+    }
+    p span::after {
+        z-index: 2;
+        color: $blue;
+        text-shadow: -1px 0 1px #684da3, 1px 0 1px rgba(0,0,0,0.8);
+        transform: rotateY(-30deg);
+    }
+    p span:hover::before {
+        transform: scale(1.1, 1) skew(0deg, 5deg);
+    }
+    p span:hover::after {
+        transform: rotateY(-10deg);
+    }
+    p span + span {
+        margin-left: 0.3em;
+    }
+    @media (min-width: 20em) {
+        p {
+            font-size: 2em;
+        }
+        p span::before,
+        p span::after {
+            display: block;
+        }
+    }
+    @media (min-width: 30em) {
+        p {
+            font-size: 3em;
+        }
+    }
+    @media (min-width: 40em) {
+        p {
+            font-size: 5em;
+        }
+    }
+    @media (min-width: 60em) {
+        p {
+            font-size: 8em;
+        }
+    }
+}
+
+.letsGo-Btn{
+    svg {
+        display: block;
+        font: 10.5em 'Montserrat';
+        width: 960px;
+        height: 300px;
+        margin: 0 auto;
+    }
+
+    .text-copy {
+        fill: none;
+        stroke: white;
+        stroke-dasharray: 6% 29%;
+        stroke-width: 5px;
+        stroke-dashoffset: 0%;
+        animation: stroke-offset 5.5s infinite linear;
+    }
+    .text-copy:nth-child(1){
+        stroke: $blue;
+        animation-delay: -1;
+    }
+
+    .text-copy:nth-child(2){
+        stroke: $red;
+        animation-delay: -2s;
+    }
+
+    .text-copy:nth-child(3){
+        stroke: $blue;
+        animation-delay: -3s;
+    }
+
+    .text-copy:nth-child(4){
+        stroke: $red;
+        animation-delay: -4s;
+    }
+
+    .text-copy:nth-child(5){
+        stroke: $red;
+        animation-delay: -5s;
+    }
+
+    @keyframes stroke-offset{
+        100% {stroke-dashoffset: -35%;}
+    }
+}
