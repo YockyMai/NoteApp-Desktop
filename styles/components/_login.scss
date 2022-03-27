@@ -49,7 +49,7 @@
 	justify-content: space-around;
 	margin-top: 50px;
 	.authBtn {
-		background-color: rgba(96, 207, 222, 1);
+		background-color: #5a5a5a;
 		border-radius: 1em;
 		height: 60px;
 		border: none;
@@ -57,6 +57,7 @@
 		transition: 0.3s;
 		cursor: pointer;
 		&:hover {
+			background-color: #303030;
 			scale: 2;
 			transition: 0.3s;
 			transform: scale(1.05);
@@ -97,21 +98,10 @@
 		height: 1.5em;
 		cursor: pointer;
 		border: 2px solid;
-		border-color: #eee #ddd #ddd #eee;
+		border-color: #6d6d6d;
 		border-radius: 1em;
 		background-color: $blue;
-		background-color: #fff;
-		-webkit-box-shadow: inset 1px 1px 3px 0px #000,
-			inset -2px -2px 3px 0px rgba(255, 255, 255, 0.3);
-		-moz-box-shadow: inset 1px 1px 3px 0px #000,
-			inset -2px -2px 3px 0px rgba(255, 255, 255, 0.3);
-		-o-box-shadow: inset 1px 1px 3px 0px #000,
-			inset -2px -2px 3px 0px rgba(255, 255, 255, 0.3);
-		box-shadow: inset 1px 1px 3px 0px #000,
-			inset -2px -2px 3px 0px rgba(255, 255, 255, 0.3);
-		-webkit-transition: 0.2s;
-		-moz-transition: 0.2s;
-		-o-transition: 0.2s;
+		background-color: #303030;
 		transition: 0.2s;
 	}
 
@@ -122,9 +112,8 @@
 		top: 2.2px;
 		width: 1em;
 		height: 1em;
-		outline: 1px solid #aaa;
 		border-radius: 1em;
-		background-color: $blue;
+		background-color: #5a5a5a;
 		-webkit-transition: 0.4s;
 		-moz-transition: 0.4s;
 		-o-transition: 0.4s;
@@ -132,7 +121,7 @@
 	}
 
 	input:checked + .slideSwitchSlider {
-		background-color: $blue;
+		background-color: #5a5a5a;
 	}
 
 	input:checked + .slideSwitchSlider::before {
@@ -140,7 +129,7 @@
 	}
 
 	input:focus + .slideSwitchSlider::after {
-		border-color: rgba(30, 143, 255, 0.5);
+		border-color: #5a5a5a;
 	}
 
 	input:checked + .slideSwitchSlider:before {
