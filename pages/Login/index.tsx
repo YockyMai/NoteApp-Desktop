@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const LoginPage = () => {
 	const [username, setUsername] = React.useState('');
@@ -14,6 +15,8 @@ const LoginPage = () => {
 	const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
 	const dispatch = useDispatch();
 	const router = useRouter();
+	const reRef = React.useRef<any>(); //captcha ref
+
 	if (isAuth) {
 		router.push('/');
 	}
@@ -59,11 +62,26 @@ const LoginPage = () => {
 							</label>
 							<h3>Save password</h3>
 						</div>
+						<div className="ReCAPTCHA">
+							<ReCAPTCHA
+								sitekey={
+									process.env
+										.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as any
+								}
+								size="normal"
+								ref={reRef}
+							/>
+						</div>
 						<div className="flex authContainer">
 							<button
 								className="authBtn"
-								onClick={(e) => {
-									registration(username, password, setLoad);
+								onClick={async (e) => {
+									registration(
+										username,
+										password,
+										setLoad,
+										reRef,
+									);
 									e.preventDefault();
 								}}>
 								<h2>Sign In</h2>
@@ -72,7 +90,12 @@ const LoginPage = () => {
 								className="authBtn"
 								onClick={(e) => {
 									dispatch(
-										login(username, password, setLoad),
+										login(
+											username,
+											password,
+											setLoad,
+											reRef,
+										),
 									);
 									e.preventDefault();
 								}}>

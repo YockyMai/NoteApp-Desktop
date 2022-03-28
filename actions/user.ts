@@ -5,14 +5,18 @@ export const registration = async (
 	username: string,
 	password: string,
 	setLoad: React.Dispatch<React.SetStateAction<boolean>>,
+	reRef: any,
 ) => {
 	try {
+		let captchaToken = reRef.current?.getValue();
+		reRef.current.reset();
 		setLoad(true);
 		const response = await axios.post(
 			'https://apifornoteapp.herokuapp.com/auth/registration',
 			{
 				username,
 				password,
+				captchaToken,
 			},
 		);
 		setLoad(false);
@@ -26,15 +30,19 @@ export const login = (
 	username: string,
 	password: string,
 	setLoad: React.Dispatch<React.SetStateAction<boolean>>,
+	reRef: any,
 ) => {
 	return async (dispatch: any) => {
 		try {
+			let captchaToken = reRef.current?.getValue();
+			reRef.current.reset();
 			setLoad(true);
 			const response = await axios.post(
 				'https://apifornoteapp.herokuapp.com/auth/login',
 				{
 					username,
 					password,
+					captchaToken,
 				},
 			);
 			setLoad(false);
