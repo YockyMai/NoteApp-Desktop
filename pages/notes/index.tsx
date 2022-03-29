@@ -29,6 +29,8 @@ const Notes: FC = ({}) => {
 				console.log(response.data.userNotes);
 				dispatch(initialNotes(response.data.userNotes));
 				setIsLoaded(false);
+			} else {
+				setIsLoaded(false);
 			}
 		})();
 	}, []);

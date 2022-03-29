@@ -11,16 +11,20 @@ export const registration = async (
 	try {
 		let captchaToken = reRef.current?.getValue();
 		reRef.current.reset();
-		setLoad(true);
-		const response = await axios.post(
-			'https://apifornoteapp.herokuapp.com/auth/registration',
-			{
-				username,
-				password,
-				captchaToken,
-			},
-		);
-		setLoad(false);
+		if (captchaToken) {
+			setLoad(true);
+			const response = await axios.post(
+				'https://apifornoteapp.herokuapp.com/auth/registration',
+				{
+					username,
+					password,
+					captchaToken,
+				},
+			);
+			setLoad(false);
+		} else {
+			alert('Пройдите проверку на reCaptcha');
+		}
 	} catch (e) {
 		alert('Вероятнее всего, такой пользователь уже существует');
 		setLoad(false);
@@ -37,18 +41,22 @@ export const login = (
 		try {
 			let captchaToken = reRef.current?.getValue();
 			reRef.current.reset();
-			setLoad(true);
-			const response = await axios.post(
-				'https://apifornoteapp.herokuapp.com/auth/login',
-				{
-					username,
-					password,
-					captchaToken,
-				},
-			);
-			setLoad(false);
-			dispatch(setUser(response.data.user));
-			localStorage.setItem('token', response.data.token);
+			if (captchaToken) {
+				setLoad(true);
+				const response = await axios.post(
+					'https://apifornoteapp.herokuapp.com/auth/login',
+					{
+						username,
+						password,
+						captchaToken,
+					},
+				);
+				setLoad(false);
+				dispatch(setUser(response.data.user));
+				localStorage.setItem('token', response.data.token);
+			} else {
+				alert('Пройдите проверку на reCaptcha');
+			}
 		} catch (e) {
 			alert('Неверный логин или пароль');
 			setLoad(false);
