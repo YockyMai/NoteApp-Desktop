@@ -13,7 +13,7 @@ export const registration = async (
 		reRef.current.reset();
 		setLoad(true);
 		const response = await axios.post(
-			'http://localhost:5000/auth/registration',
+			'https://apifornoteapp.herokuapp.com/auth/registration',
 			{
 				username,
 				password,
@@ -39,7 +39,7 @@ export const login = (
 			reRef.current.reset();
 			setLoad(true);
 			const response = await axios.post(
-				'http://localhost:5000/auth/login',
+				'https://apifornoteapp.herokuapp.com/auth/login',
 				{
 					username,
 					password,

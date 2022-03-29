@@ -20,8 +20,6 @@ const NoteEditor: FC<editorProps> = ({}) => {
 
 	const id = router.query.id;
 
-	let noteTextInit: string = 'Type something...';
-
 	const username = useSelector(
 		(state: RootState) => state.userReducer.currentUser.username,
 	);
@@ -33,10 +31,10 @@ const NoteEditor: FC<editorProps> = ({}) => {
 	console.log(dataNoteEl);
 
 	const [titleValue, setTitleValue] = React.useState(
-		dataNoteEl ? dataNoteEl.title : 'qwe',
+		dataNoteEl ? dataNoteEl.title : 'Title',
 	);
 	const [noteValue, setNoteValue] = React.useState(
-		dataNoteEl ? dataNoteEl.noteText : noteTextInit,
+		dataNoteEl ? dataNoteEl.noteText : 'Type something...',
 	);
 	const [color, setColor] = React.useState<string>(
 		dataNoteEl ? dataNoteEl.color : '#929292',
