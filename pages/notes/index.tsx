@@ -7,6 +7,7 @@ import { RootState } from '../../redux/reducers';
 import axios from 'axios';
 import { initialNotes } from '../../redux/actions/notes';
 import StartImage from '../../public/images/StartImage.png';
+import startArrow from '../../public/images/startArrow.svg';
 import Image from 'next/image';
 
 const Notes = () => {
@@ -46,7 +47,12 @@ const Notes = () => {
 					))}
 				</div>
 			) : (
-				<Image src={StartImage} />
+				<div className="startScreen">
+					<div>
+						<Image src={StartImage} />
+					</div>
+					<h1>Create your first note!</h1>
+				</div>
 			)}
 			<Link href={`notes/newNote`}>
 				<a>

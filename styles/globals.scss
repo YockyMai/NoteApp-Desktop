@@ -73,3 +73,12 @@ a {
 	display: flex;
 	align-items: center;
 }
+
+.startScreen {
+	margin: 0 auto;
+	* {
+		margin: 0 auto !important;
+		text-align: center;
+		font-weight: 200;
+	}
+}

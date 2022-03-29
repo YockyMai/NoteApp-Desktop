@@ -12,7 +12,7 @@ export const onSaveNote = (
 		try {
 			if (id !== 'newNote') {
 				const response = await axios.post(
-					'http://localhost:5000/notes/createnote',
+					'https://apifornoteapp.herokuapp.com/notes/createnote',
 					{
 						username: username,
 						note: {
@@ -26,7 +26,7 @@ export const onSaveNote = (
 				// dispatch(saveNote(response.data.result));
 			} else {
 				const response = await axios.post(
-					'http://localhost:5000/notes/createnote',
+					'https://apifornoteapp.herokuapp.com/notes/createnote',
 					{
 						username: username,
 						note: {
