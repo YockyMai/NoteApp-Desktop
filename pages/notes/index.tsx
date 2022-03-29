@@ -4,12 +4,29 @@ import TaskElement from '../../components/taskElement';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { RootState } from '../../redux/reducers';
+import axios from 'axios';
+import { initialNotes } from '../../redux/actions/notes';
+import StartImage from '../../public/images/StartImage.png';
+import Image from 'next/image';
 
 const Notes = () => {
 	const [TaskData, setTaskData] = React.useState<number>(0);
 	const dispatch = useDispatch();
+	const user = useSelector((state: RootState) => state.userReducer);
+	console.log(user);
 	useEffect(() => {
-		localStorage.setItem('notesData', '123');
+		(async () => {
+			if (user.isAuth) {
+				const response = await axios.post(
+					'http://localhost:5000/notes/getnotes',
+					{
+						username: user.currentUser.username,
+					},
+				);
+				console.log(response.data.userNotes);
+				dispatch(initialNotes(response.data.userNotes));
+			}
+		})();
 	}, []);
 
 	const taskElements: any = useSelector(
@@ -17,17 +34,21 @@ const Notes = () => {
 	);
 	return (
 		<MainLayout>
-			<div className="taskContainer">
-				{taskElements.map((taskEl: any, index: number) => (
-					<TaskElement
-						key={index}
-						id={taskEl.id}
-						color={taskEl.color}
-						title={taskEl.title}
-					/>
-				))}
-			</div>
-			<Link href={`notes/${taskElements.length}`}>
+			{taskElements.length > 0 ? (
+				<div className="taskContainer">
+					{taskElements.map((taskEl: any, index: number) => (
+						<TaskElement
+							key={index}
+							id={taskEl._id}
+							color={taskEl.color}
+							title={taskEl.title}
+						/>
+					))}
+				</div>
+			) : (
+				<Image src={StartImage} />
+			)}
+			<Link href={`notes/newNote`}>
 				<a>
 					<div className="add-tusk-button">
 						<section className="svg-container">

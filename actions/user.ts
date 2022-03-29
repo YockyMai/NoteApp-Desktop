@@ -1,5 +1,6 @@
 import { logOut, setUser } from './../redux/actions/user';
 import axios from 'axios';
+import { deleteAllNotes } from '../redux/actions/notes';
 
 export const registration = async (
 	username: string,
@@ -12,7 +13,7 @@ export const registration = async (
 		reRef.current.reset();
 		setLoad(true);
 		const response = await axios.post(
-			'https://apifornoteapp.herokuapp.com/auth/registration',
+			'http://localhost:5000/auth/registration',
 			{
 				username,
 				password,
@@ -38,7 +39,7 @@ export const login = (
 			reRef.current.reset();
 			setLoad(true);
 			const response = await axios.post(
-				'https://apifornoteapp.herokuapp.com/auth/login',
+				'http://localhost:5000/auth/login',
 				{
 					username,
 					password,
@@ -59,6 +60,7 @@ export const logout = () => {
 	return async (dispatch: any) => {
 		try {
 			dispatch(logOut());
+			dispatch(deleteAllNotes());
 			localStorage.removeItem('token');
 		} catch (e) {
 			alert('Упс, что-то пошло не так!');

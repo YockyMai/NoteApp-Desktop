@@ -6,6 +6,9 @@ import { Head } from 'next/dist/pages/_document';
 import { saveNote } from '../../redux/actions/notes';
 import { Input } from 'postcss';
 import { RootState } from '../../redux/reducers';
+import axios from 'axios';
+import { onSaveNote } from '../../actions/notes';
+import Link from 'next/link';
 
 interface editorProps {
 	id?: number;
@@ -15,43 +18,36 @@ const NoteEditor: FC<editorProps> = ({}) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
 
-	const noteColor = useRef<HTMLInputElement>();
-
 	const id = router.query.id;
-	let titleText: string = 'Title';
+
 	let noteTextInit: string = 'Type something...';
-	const dataNote = useSelector(
-		(state: RootState) => state.notesReducer.notes[id as string],
+
+	const username = useSelector(
+		(state: RootState) => state.userReducer.currentUser.username,
 	);
+	const dataNotes = useSelector(
+		(state: RootState) => state.notesReducer.notes,
+	);
+
+	let dataNoteEl = dataNotes.find((dataNotes: any) => dataNotes._id === id);
+	console.log(dataNoteEl);
 
 	const [titleValue, setTitleValue] = React.useState(
-		dataNote ? dataNote.title : titleText,
+		dataNoteEl ? dataNoteEl.title : 'qwe',
 	);
 	const [noteValue, setNoteValue] = React.useState(
-		dataNote ? dataNote.text : noteTextInit,
+		dataNoteEl ? dataNoteEl.noteText : noteTextInit,
 	);
 	const [color, setColor] = React.useState<string>(
-		dataNote ? dataNote.color : '#929292',
+		dataNoteEl ? dataNoteEl.color : '#929292',
 	);
 
-	let k = 0;
 	const onChangeTitleValue = (e: any) => {
 		if (e.target.value.length >= 0 && e.target.value.length !== 30) {
 			setTitleValue(e.target.value);
 		} else if (e.target.value.length === 30) {
 			alert('Вы достигли максимального количества символов');
 		}
-	};
-
-	const onSaveNote = () => {
-		let idNote = Number(id); // преобразуем в строку
-		const noteObj = {
-			id: idNote,
-			title: titleValue,
-			text: noteValue,
-			color: color,
-		};
-		dispatch(saveNote(noteObj));
 	};
 
 	function onChangeNoteValue(e: any) {
@@ -63,6 +59,7 @@ const NoteEditor: FC<editorProps> = ({}) => {
 			<div className="noteEditor">
 				<div className="noteTitle">
 					<input
+						placeholder="Title..."
 						className="titleValue"
 						type="text"
 						value={titleValue}
@@ -75,7 +72,42 @@ const NoteEditor: FC<editorProps> = ({}) => {
 					onChange={onChangeNoteValue}
 				/>
 				<div className="controlPanel">
-					<button onClick={onSaveNote}>Сохранить!</button>
+					{id === 'newNote' ? (
+						<Link href="/notes">
+							<a>
+								<button
+									onClick={() => {
+										dispatch(
+											onSaveNote(
+												username,
+												id as string,
+												titleValue,
+												color,
+												noteValue,
+											),
+										);
+									}}>
+									Сохранить!
+								</button>
+							</a>
+						</Link>
+					) : (
+						<button
+							onClick={() => {
+								dispatch(
+									onSaveNote(
+										username,
+										id as string,
+										titleValue,
+										color,
+										noteValue,
+									),
+								);
+							}}>
+							Сохранить!
+						</button>
+					)}
+
 					<input
 						className="noteColor"
 						onChange={(e) => {
