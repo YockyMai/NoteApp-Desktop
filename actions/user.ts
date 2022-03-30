@@ -1,17 +1,20 @@
 import { logOut, setUser } from './../redux/actions/user';
+import { Dispatch } from 'react';
 import axios from 'axios';
 import { deleteAllNotes } from '../redux/actions/notes';
+import { SetStateAction } from 'react';
 
 export const registration = async (
 	username: string,
 	password: string,
 	setLoad: React.Dispatch<React.SetStateAction<boolean>>,
 	reRef: any,
+	setResInfo: Dispatch<SetStateAction<any>>,
 ) => {
 	try {
 		let captchaToken = reRef.current?.getValue();
-		reRef.current.reset();
 		if (captchaToken) {
+			reRef.current.reset();
 			setLoad(true);
 			const response = await axios.post(
 				'https://apifornoteapp.herokuapp.com/auth/registration',
@@ -21,12 +24,19 @@ export const registration = async (
 					captchaToken,
 				},
 			);
+			console.log(response.status);
 			setLoad(false);
 		} else {
-			alert('Пройдите проверку на reCaptcha');
+			setResInfo({
+				status: 'bad',
+				message: 'Пройдите проверку на reCaptcha',
+			});
 		}
 	} catch (e) {
-		alert('Вероятнее всего, такой пользователь уже существует');
+		setResInfo({
+			status: 'bad',
+			message: 'Вероятнее всего, такой пользователь уже существует',
+		});
 		setLoad(false);
 	}
 };
@@ -36,12 +46,13 @@ export const login = (
 	password: string,
 	setLoad: React.Dispatch<React.SetStateAction<boolean>>,
 	reRef: any,
+	setResInfo: Dispatch<SetStateAction<any>>,
 ) => {
 	return async (dispatch: any) => {
 		try {
 			let captchaToken = reRef.current?.getValue();
-			reRef.current.reset();
 			if (captchaToken) {
+				reRef.current.reset();
 				setLoad(true);
 				const response = await axios.post(
 					'https://apifornoteapp.herokuapp.com/auth/login',
@@ -55,10 +66,16 @@ export const login = (
 				dispatch(setUser(response.data.user));
 				localStorage.setItem('token', response.data.token);
 			} else {
-				alert('Пройдите проверку на reCaptcha');
+				setResInfo({
+					status: 'bad',
+					message: 'Пройдите проверку на reCaptcha',
+				});
 			}
 		} catch (e) {
-			alert('Неверный логин или пароль');
+			setResInfo({
+				status: 'bad',
+				message: 'Неверный логин или пароль',
+			});
 			setLoad(false);
 		}
 	};

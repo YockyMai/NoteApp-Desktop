@@ -82,3 +82,16 @@ a {
 		font-weight: 200;
 	}
 }
+
+.error {
+	background-color: $red;
+	padding: 10px 30px 10px 30px;
+	border-radius: 0.6em;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	overflow: hidden;
+	z-index: 100;
+	bottom: 20px;
+	cursor: pointer;
+}

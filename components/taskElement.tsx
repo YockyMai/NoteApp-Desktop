@@ -3,15 +3,22 @@ import deleteIcon from '../public/images/delete.svg';
 import linkIcon from '../public/images/link.svg';
 import React, { FC, useState } from 'react';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteNote } from '../actions/notes';
+import { RootState } from '../redux/reducers';
 
 interface taskProps {
 	color: string;
 	title: string;
-	id: number;
+	id: string;
 }
 
 const TaskElement: FC<taskProps> = ({ color, title, id }) => {
 	const [hover, setHover] = useState<boolean>(false);
+	const dispatch = useDispatch();
+	const username = useSelector(
+		(state: RootState) => state.userReducer.currentUser.username,
+	);
 	const onTuskEnter = () => {
 		setHover(true);
 	};
@@ -33,7 +40,11 @@ const TaskElement: FC<taskProps> = ({ color, title, id }) => {
 				className={
 					hover ? 'task-controlPanel visible' : 'task-controlPanel'
 				}>
-				<span className="task-controlBtn btn">
+				<span
+					className="task-controlBtn btn"
+					onClick={() => {
+						dispatch(deleteNote(username, id));
+					}}>
 					<Image src={deleteIcon} alt="delete" />
 				</span>
 				<span className="task-controlBtn btn">

@@ -6,16 +6,21 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { Error } from '../../components/Error';
 
 const LoginPage = () => {
 	const [username, setUsername] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const [savepass, setSavePass] = React.useState(true);
+	const [resInfo, setResInfo] = React.useState<any>({
+		status: 'ok',
+	});
+
 	const [loader, setLoad] = React.useState(false);
 	const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
 	const dispatch = useDispatch();
 	const router = useRouter();
-	const reRef = React.useRef<any>(); //captcha ref
+	const reRef = React.useRef<{}>(); //captcha ref
 
 	if (isAuth) {
 		router.push('/');
@@ -69,7 +74,7 @@ const LoginPage = () => {
 										.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as any
 								}
 								size="normal"
-								ref={reRef}
+								ref={reRef as any}
 							/>
 						</div>
 						<div className="flex authContainer">
@@ -81,10 +86,11 @@ const LoginPage = () => {
 										password,
 										setLoad,
 										reRef,
+										setResInfo,
 									);
 									e.preventDefault();
 								}}>
-								<h2>Sign In</h2>
+								<h2>Sign Up</h2>
 							</button>
 							<button
 								className="authBtn"
@@ -95,15 +101,21 @@ const LoginPage = () => {
 											password,
 											setLoad,
 											reRef,
+											setResInfo,
 										),
 									);
 									e.preventDefault();
 								}}>
-								<h2>Sign Up</h2>
+								<h2>Sign In</h2>
 							</button>
 						</div>
 					</form>
 				</div>
+			)}
+			{resInfo.status == 'bad' ? (
+				<Error setResInfo={setResInfo} message={resInfo.message} />
+			) : (
+				''
 			)}
 		</MainLayout>
 	);

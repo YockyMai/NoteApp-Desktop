@@ -9,6 +9,7 @@ import { initialNotes } from '../../redux/actions/notes';
 import StartImage from '../../public/images/StartImage.png';
 import startArrow from '../../public/images/startArrow.svg';
 import Image from 'next/image';
+import { Error } from '../../components/Error';
 
 const Notes: FC = ({}) => {
 	const [TaskData, setTaskData] = React.useState<number>(0);

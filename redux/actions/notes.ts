@@ -22,3 +22,10 @@ export const deleteAllNotes = () => {
 		type: 'DELETE_ALL_NOTES',
 	};
 };
+
+export const deleteNotes = (id: string) => {
+	return {
+		type: 'DELETE_NOTE',
+		id: id,
+	};
+};

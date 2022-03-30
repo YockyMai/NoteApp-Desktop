@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { saveNote } from '../redux/actions/notes';
+import { deleteNotes } from '../redux/actions/notes';
 
 export const onSaveNote = (
 	username: string,
@@ -7,6 +7,7 @@ export const onSaveNote = (
 	titleValue: string,
 	color: string,
 	noteValue: string,
+	// setResInfo: React.Dispatch<SetStateAction<any>>,
 ) => {
 	return async (dispatch: any) => {
 		try {
@@ -23,6 +24,7 @@ export const onSaveNote = (
 						},
 					},
 				);
+				console.log(response);
 				// dispatch(saveNote(response.data.result));
 			} else {
 				const response = await axios.post(
@@ -37,6 +39,29 @@ export const onSaveNote = (
 					},
 				);
 			}
-		} catch (e) {}
+		} catch (e) {
+			console.log(e);
+		}
+	};
+};
+
+export const deleteNote = (
+	username: string,
+	id: string,
+	// setResInfo: React.Dispatch<SetStateAction<any>>,
+) => {
+	return async (dispatch: any) => {
+		try {
+			const response = await axios.post(
+				'https://apifornoteapp.herokuapp.com/notes/deletenote',
+				{
+					username: username,
+					id: id,
+				},
+			);
+			dispatch(deleteNotes(id));
+		} catch (e) {
+			console.log(e);
+		}
 	};
 };
