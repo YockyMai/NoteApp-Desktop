@@ -89,7 +89,8 @@ const Notes: FC = ({}) => {
 											<Image src={StartImage} />
 										</div>
 										<h1>
-											Oops, there doesn't seem to be a
+											Oops, there doesn&apos;t seem to be
+											a
 											<br />
 											notes with that title.
 										</h1>
