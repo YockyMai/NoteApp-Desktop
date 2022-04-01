@@ -1,0 +1,48 @@
+@import '../variables';
+
+.Search {
+	// background-color: rgba(27, 27, 27, 0.747);
+	background-color: #313131;
+	position: fixed;
+	width: 100%;
+	height: 120px;
+	top: -0;
+	.search__input {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		width: 50%;
+		top: 50%;
+		border: none;
+		height: 50%;
+		border-radius: 0.6em;
+		font-size: 24px;
+		padding: 15px;
+		background-color: rgb(19, 19, 19);
+		color: #ffffff;
+	}
+}
+
+.Search.entering {
+	top: -120px;
+	transition: 300ms;
+	opacity: 0;
+}
+
+.Search.entered {
+	transition: 300ms;
+	opacity: 1;
+	top: 0;
+}
+
+.Search.exiting {
+	transition: 300ms;
+	opacity: 0;
+	top: -120px;
+}
+
+.Search.exited {
+	transition: 300ms;
+	opacity: 0;
+	top: -120px;
+}

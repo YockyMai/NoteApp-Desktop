@@ -5,12 +5,13 @@ import Header from './Header';
 interface appProps {
 	children: any;
 	header?: any;
+	setInProp?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MainLayout: React.FC<appProps> = ({ children, header }) => {
+const MainLayout: React.FC<appProps> = ({ children, header, setInProp }) => {
 	return (
 		<div>
-			<Header {...header} />
+			<Header setInProp={setInProp} {...header} />
 			<main>{children}</main>
 		</div>
 	);

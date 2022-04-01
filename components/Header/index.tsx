@@ -11,9 +11,10 @@ import { logout } from '../../actions/user';
 
 interface HeaderProps {
 	register?: boolean;
+	setInProp?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Header: React.FC<HeaderProps> = ({ register }) => {
+const Header: React.FC<HeaderProps> = ({ register, setInProp }) => {
 	const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
 	const dispatch = useDispatch();
 	const username = useSelector(
@@ -26,45 +27,38 @@ const Header: React.FC<HeaderProps> = ({ register }) => {
 				<Logo />
 				{isAuth && <h2>{username}</h2>}
 				<div className="header__btnBlock">
+					<button
+						className="btn header-btn"
+						onClick={() => {
+							if (setInProp) setInProp(true);
+						}}>
+						<Image src={searchIcon} alt="search" />
+					</button>
+					<button className="btn header-btn">
+						<Image src={settingIcon} alt="setting" />
+					</button>
 					{!isAuth && (
-						<>
-							<button className="btn header-btn">
-								<Image src={searchIcon} alt="search" />
-							</button>
-							<button className="btn header-btn">
-								<Image src={settingIcon} alt="setting" />
-							</button>
-							<Link href="/Login">
-								<a>
-									<button className="btn auth-btn">
-										<h3>Register / LogIn</h3>
-									</button>
-								</a>
-							</Link>
-						</>
+						<Link href="/Login">
+							<a>
+								<button className="btn auth-btn">
+									<h3>Register / LogIn</h3>
+								</button>
+							</a>
+						</Link>
 					)}
 					{isAuth && (
-						<>
-							<button className="btn header-btn">
-								<Image src={searchIcon} alt="search" />
-							</button>
-							<button className="btn header-btn">
-								<Image src={settingIcon} alt="setting" />
-							</button>
-
-							<button
-								className="btn header-btn"
-								onClick={() => {
-									dispatch(logout());
-								}}>
-								<Image
-									src={logoutSvg}
-									alt="LogOut"
-									height={40}
-									width={40}
-								/>
-							</button>
-						</>
+						<button
+							className="btn header-btn"
+							onClick={() => {
+								dispatch(logout());
+							}}>
+							<Image
+								src={logoutSvg}
+								alt="LogOut"
+								height={40}
+								width={40}
+							/>
+						</button>
 					)}
 				</div>
 			</header>

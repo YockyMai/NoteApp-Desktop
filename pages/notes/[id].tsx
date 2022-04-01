@@ -41,9 +41,9 @@ const NoteEditor: FC<editorProps> = ({}) => {
 	);
 
 	const onChangeTitleValue = (e: any) => {
-		if (e.target.value.length >= 0 && e.target.value.length !== 30) {
+		if (e.target.value.length >= 0 && e.target.value.length <= 29) {
 			setTitleValue(e.target.value);
-		} else if (e.target.value.length === 30) {
+		} else if (e.target.value.length >= 30) {
 			alert('Вы достигли максимального количества символов');
 		}
 	};

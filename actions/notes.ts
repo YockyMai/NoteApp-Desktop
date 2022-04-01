@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { deleteNotes } from '../redux/actions/notes';
+import { deleteNotes, saveNote } from '../redux/actions/notes';
 
 export const onSaveNote = (
 	username: string,
@@ -25,7 +25,7 @@ export const onSaveNote = (
 					},
 				);
 				console.log(response);
-				// dispatch(saveNote(response.data.result));
+				dispatch(saveNote(response.data.result));
 			} else {
 				const response = await axios.post(
 					'https://apifornoteapp.herokuapp.com/notes/createnote',
@@ -52,6 +52,7 @@ export const deleteNote = (
 ) => {
 	return async (dispatch: any) => {
 		try {
+			dispatch(deleteNotes(id));
 			const response = await axios.post(
 				'https://apifornoteapp.herokuapp.com/notes/deletenote',
 				{
@@ -59,7 +60,6 @@ export const deleteNote = (
 					id: id,
 				},
 			);
-			dispatch(deleteNotes(id));
 		} catch (e) {
 			console.log(e);
 		}
