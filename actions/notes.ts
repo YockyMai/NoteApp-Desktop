@@ -25,7 +25,13 @@ export const onSaveNote = (
 					},
 				);
 				console.log(response);
-				dispatch(saveNote(response.data.result));
+				const notesInfo = {
+					id: id,
+					title: titleValue,
+					color: color,
+					noteText: noteValue,
+				};
+				dispatch(saveNote(notesInfo as any));
 			} else {
 				const response = await axios.post(
 					'https://apifornoteapp.herokuapp.com/notes/createnote',

@@ -10,7 +10,6 @@ interface notesInfo {
 	color: string;
 }
 export const saveNote = (notesInfo: notesInfo) => {
-	console.log(notesInfo);
 	return {
 		type: 'SAVE_NOTE',
 		payload: notesInfo,
