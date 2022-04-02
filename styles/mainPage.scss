@@ -9,7 +9,7 @@
 
 	.task-element {
 		margin-right: 80px;
-		padding: 25px 40px;
+
 		width: 22.7em;
 		min-height: 70px;
 		height: 100%;
@@ -19,6 +19,7 @@
 		position: relative;
 
 		.taskEl--text {
+			padding: 25px 40px;
 			font-size: 25px;
 			text-overflow: ellipsis;
 			overflow: hidden;

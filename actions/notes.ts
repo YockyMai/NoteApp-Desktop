@@ -11,7 +11,14 @@ export const onSaveNote = (
 ) => {
 	return async (dispatch: any) => {
 		try {
+			const notesInfo = {
+				id: id,
+				title: titleValue,
+				color: color,
+				noteText: noteValue,
+			};
 			if (id !== 'newNote') {
+				dispatch(saveNote(notesInfo as any));
 				const response = await axios.post(
 					'https://apifornoteapp.herokuapp.com/notes/createnote',
 					{
@@ -24,15 +31,8 @@ export const onSaveNote = (
 						},
 					},
 				);
-				console.log(response);
-				const notesInfo = {
-					id: id,
-					title: titleValue,
-					color: color,
-					noteText: noteValue,
-				};
-				dispatch(saveNote(notesInfo as any));
 			} else {
+				dispatch(saveNote(notesInfo as any));
 				const response = await axios.post(
 					'https://apifornoteapp.herokuapp.com/notes/createnote',
 					{

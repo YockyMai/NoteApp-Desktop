@@ -17,7 +17,6 @@ const Notes: FC = ({}) => {
 	console.log(inProp);
 	const [TaskData, setTaskData] = React.useState<number>(0);
 	const [searchValue, setSearchValue] = React.useState('');
-	console.log(searchValue);
 	const [isLoaded, setIsLoaded] = React.useState(true);
 	const dispatch = useDispatch();
 	const user = useSelector((state: RootState) => state.userReducer);
@@ -48,111 +47,123 @@ const Notes: FC = ({}) => {
 	});
 	console.log(filteredNotes);
 	return (
-		<MainLayout setInProp={setInProp}>
-			<Search
-				inProp={inProp}
-				searchValue={searchValue}
-				setSearchValue={setSearchValue}
-			/>
-			{isLoaded ? (
-				<div className="container-loader">
-					<div className="spinner-block">
-						<div className="spinner spinner-1"></div>
-					</div>
-				</div>
-			) : (
-				<div
-					className="noteContent"
-					onClick={() => {
+		<div
+			onKeyDown={(e: any) => {
+				if (inProp === true)
+					if (e.keyCode === 27) {
 						setInProp(false);
 						setSearchValue('');
-					}}>
-					<div>
-						{taskElements.length > 0 ? (
-							<>
-								{filteredNotes.length > 0 ? (
-									<div className="taskContainer">
-										{filteredNotes.map(
-											(taskEl: any, index: number) => (
-												<TaskElement
-													key={index}
-													id={taskEl._id}
-													color={taskEl.color}
-													title={taskEl.title}
-												/>
-											),
-										)}
-									</div>
-								) : (
-									<div className="startScreen">
-										<div>
-											<Image src={StartImage} />
-										</div>
-										<h1>
-											Oops, there doesn&apos;t seem to be
-											a
-											<br />
-											notes with that title.
-										</h1>
-									</div>
-								)}
-							</>
-						) : (
-							<div className="startScreen">
-								<div>
-									<Image src={StartImage} />
-								</div>
-								<h1>Create your first note!</h1>
-							</div>
-						)}
-						<Link href={`notes/newNote`}>
-							<a>
-								<div className="add-tusk-button">
-									<section className="svg-container">
-										<svg
-											className="circle"
-											xmlns="http://www.w3.org/2000/svg">
-											<g>
-												<ellipse
-													className="background"
-													ry="60"
-													rx="60"
-													cy="62.5"
-													cx="62.5"
-													strokeWidth="2"
-												/>
-												<ellipse
-													className="foreground"
-													ry="60"
-													rx="60"
-													cy="62.5"
-													cx="62.5"
-													strokeWidth="2"
-												/>
-												<line
-													className="line line1"
-													x1="52"
-													y1="62"
-													x2="74"
-													y2="62"
-												/>
-												<line
-													className="line line2"
-													x1="52"
-													y1="62"
-													x2="74"
-													y2="62"
-												/>
-											</g>
-										</svg>
-									</section>
-								</div>
-							</a>
-						</Link>
+					}
+			}}>
+			<MainLayout setInProp={setInProp}>
+				<Search
+					inProp={inProp}
+					searchValue={searchValue}
+					setSearchValue={setSearchValue}
+				/>
+				{isLoaded ? (
+					<div className="container-loader">
+						<div className="spinner-block">
+							<div className="spinner spinner-1"></div>
+						</div>
 					</div>
-				</div>
-			)}
-		</MainLayout>
+				) : (
+					<div
+						className="noteContent"
+						onClick={() => {
+							setInProp(false);
+							setSearchValue('');
+						}}>
+						<div>
+							{taskElements.length > 0 ? (
+								<>
+									{filteredNotes.length > 0 ? (
+										<div className="taskContainer">
+											{filteredNotes.map(
+												(
+													taskEl: any,
+													index: number,
+												) => (
+													<TaskElement
+														key={index}
+														id={taskEl._id}
+														color={taskEl.color}
+														title={taskEl.title}
+													/>
+												),
+											)}
+										</div>
+									) : (
+										<div className="startScreen">
+											<div>
+												<Image src={StartImage} />
+											</div>
+											<h1>
+												Oops, there doesn&apos;t seem to
+												be a
+												<br />
+												notes with that title.
+											</h1>
+										</div>
+									)}
+								</>
+							) : (
+								<div className="startScreen">
+									<div>
+										<Image src={StartImage} />
+									</div>
+									<h1>Create your first note!</h1>
+								</div>
+							)}
+							<Link href={`notes/newNote`}>
+								<a>
+									<div className="add-tusk-button">
+										<section className="svg-container">
+											<svg
+												className="circle"
+												xmlns="http://www.w3.org/2000/svg">
+												<g>
+													<ellipse
+														className="background"
+														ry="60"
+														rx="60"
+														cy="62.5"
+														cx="62.5"
+														strokeWidth="2"
+													/>
+													<ellipse
+														className="foreground"
+														ry="60"
+														rx="60"
+														cy="62.5"
+														cx="62.5"
+														strokeWidth="2"
+													/>
+													<line
+														className="line line1"
+														x1="52"
+														y1="62"
+														x2="74"
+														y2="62"
+													/>
+													<line
+														className="line line2"
+														x1="52"
+														y1="62"
+														x2="74"
+														y2="62"
+													/>
+												</g>
+											</svg>
+										</section>
+									</div>
+								</a>
+							</Link>
+						</div>
+					</div>
+				)}
+			</MainLayout>
+		</div>
 	);
 };
 

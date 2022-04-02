@@ -69,3 +69,44 @@
 		pointer-events: none;
 	}
 }
+
+.controlPanel {
+	position: fixed;
+	bottom: 50px;
+	right: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.saveNoteBtn {
+		height: 60px;
+		width: 60px;
+		border: 0px;
+		cursor: pointer;
+		border-radius: 0.6em;
+		background-color: $main-color;
+		outline: 2px solid $pre-main-color;
+		transition: 150ms ease-in-out;
+		&:hover {
+			background-color: $pre-main-color;
+			transition: 150ms ease-in-out;
+		}
+	}
+	.noteColor-container {
+		border-radius: 50%;
+		overflow: hidden;
+		width: 50px;
+		height: 50px;
+		position: relative;
+		margin-bottom: 20px;
+		.noteColor {
+			position: absolute;
+			left: 50%;
+			top: -10px;
+			transform: translateX(-50%);
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+	}
+}
