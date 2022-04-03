@@ -24,7 +24,6 @@ export const registration = async (
 					captchaToken,
 				},
 			);
-			console.log(response.status);
 			setLoad(false);
 		} else {
 			setResInfo({
@@ -89,6 +88,27 @@ export const logout = () => {
 			localStorage.removeItem('token');
 		} catch (e) {
 			alert('Упс, что-то пошло не так!');
+		}
+	};
+};
+
+export const auth = () => {
+	return async (dispatch: any) => {
+		try {
+			let token = localStorage.getItem('token');
+			const response = await axios.get(
+				'https://apifornoteapp.herokuapp.com/auth/auth',
+				{
+					headers: {
+						authorization: `Bearer ${token}`,
+					},
+				},
+			);
+			dispatch(setUser(response.data.user));
+			localStorage.setItem('token', response.data.token);
+		} catch (e) {
+			console.log(e);
+			localStorage.removeItem('token');
 		}
 	};
 };

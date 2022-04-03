@@ -20,7 +20,6 @@ const notesReducer = (state: any = initialState, action: any) => {
 			let why: boolean = false;
 			state.notes[action.payload.id] ? (why = true) : (why = false);
 
-			console.log(why);
 			if (why) {
 				state.notes[action.payload.id] = action.payload;
 				return {
@@ -51,7 +50,6 @@ const notesReducer = (state: any = initialState, action: any) => {
 				}
 				k++;
 			});
-			console.log(noteKey);
 			return {
 				...state,
 				notes: state.notes

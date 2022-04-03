@@ -11,16 +11,19 @@ import startArrow from '../../public/images/startArrow.svg';
 import Image from 'next/image';
 import { Error } from '../../components/Error';
 import { Search } from '../../components/Search';
+import { auth } from '../../actions/user';
 
 const Notes: FC = ({}) => {
 	const [inProp, setInProp] = React.useState(false);
-	console.log(inProp);
 	const [TaskData, setTaskData] = React.useState<number>(0);
 	const [searchValue, setSearchValue] = React.useState('');
 	const [isLoaded, setIsLoaded] = React.useState(true);
 	const dispatch = useDispatch();
 	const user = useSelector((state: RootState) => state.userReducer);
+
 	useEffect(() => {
+		auth();
+
 		(async () => {
 			if (user.isAuth) {
 				setIsLoaded(true);
@@ -45,7 +48,6 @@ const Notes: FC = ({}) => {
 	const filteredNotes = taskElements.filter((note: { title: string }) => {
 		return note.title.toLowerCase().includes(searchValue.toLowerCase());
 	});
-	console.log(filteredNotes);
 	return (
 		<div
 			onKeyDown={(e: any) => {

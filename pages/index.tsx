@@ -1,14 +1,22 @@
 import type { NextPage } from 'next';
 import MainLayout from '../components/MainLayout';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/reducers';
+import React from 'react';
+import { auth } from '../actions/user';
 
 const Home: NextPage = () => {
+	const dispatch = useDispatch();
+
+	React.useEffect(() => {
+		dispatch(auth());
+	}, []);
+
 	const username = useSelector(
 		(state: RootState) => state.userReducer.currentUser.username,
 	);
-	console.log(username);
+
 	return (
 		<MainLayout>
 			<div className="welcome-block-container">
