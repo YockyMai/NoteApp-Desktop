@@ -32,7 +32,7 @@ export const onSaveNote = (
 					},
 				);
 			} else {
-				dispatch(saveNote(notesInfo as any));
+				await dispatch(saveNote(notesInfo as any));
 				const response = await axios.post(
 					'https://apifornoteapp.herokuapp.com/notes/createnote',
 					{

@@ -22,9 +22,8 @@ const Notes: FC = ({}) => {
 	const user = useSelector((state: RootState) => state.userReducer);
 
 	useEffect(() => {
-		auth();
-
 		(async () => {
+			dispatch(auth());
 			if (user.isAuth) {
 				setIsLoaded(true);
 				const response = await axios.post(

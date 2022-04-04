@@ -1,23 +1,21 @@
 @import 'variables';
 
 .taskContainer {
+	overflow: auto;
 	width: 70%;
+	max-height: 88vh;
 	margin: 0 auto;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-row-gap: 20px !important;
+	align-items: start; // задает выравнивание относительно содержимого яйчекий
 	.task-element {
-		margin-right: 80px;
-
 		width: 22.7em;
-		min-height: 70px;
-		height: 100%;
+		margin: 0 auto;
 		background-color: #fd99ff;
 		border-radius: $radius;
 		margin-top: 50px;
 		position: relative;
-
 		.taskEl--text {
 			padding: 25px 40px;
 			font-size: 25px;
@@ -27,16 +25,21 @@
 				cursor: pointer;
 			}
 		}
-
+		&:hover {
+			.task-controlPanel {
+				right: -4px;
+				z-index: 1;
+			}
+		}
 		.task-controlPanel {
 			position: absolute;
 			width: 30px;
-			height: 67px;
-			box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-			border-radius: 10px;
-			right: 0;
+			border-radius: 0 10px 10px 0;
+			right: 0px;
+			height: 90%;
+			z-index: -1;
 			top: 50%;
-			transform: translateY(-50%) translateX(50%);
+			transform: translateY(-50.5%) translateX(50%);
 			display: flex;
 			flex-direction: column;
 			justify-content: space-around;
@@ -44,18 +47,22 @@
 			zoom: 1.2; /* all browsers */
 			-moz-transform: scale(1.2); /* Firefox */
 			outline: 0px solid $blue;
-			opacity: 0;
 			transition: $delay;
 			visibility: hidden;
-
+			opacity: 0;
 			.task-controlBtn {
 				height: 20px;
 				width: 20px;
 				border-radius: 50%;
 				position: relative;
-
+				svg {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translateY(-50%) translateX(-50%);
+				}
 				&:hover {
-					outline: 1px solid $blue;
+					outline: 1px solid $red;
 				}
 			}
 		}

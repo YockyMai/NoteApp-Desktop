@@ -1,0 +1,51 @@
+@media all and (max-width: 1700px) {
+	.taskContainer {
+		grid-template-columns: 1fr 1fr 1fr;
+		width: 90%;
+	}
+	.welcome-block {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+}
+
+@media all and (max-width: 1453px) {
+	.taskContainer {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media all and (max-width: 931px) {
+	.letsGo-Btn {
+		svg {
+			width: 100% !important;
+		}
+	}
+
+	.header {
+		h2 {
+			display: none;
+		}
+		.logo {
+			.logoImage-underline {
+				display: none;
+			}
+		}
+	}
+	.taskContainer {
+		grid-template-columns: 1fr;
+	}
+	.controlPanel {
+		right: 10px;
+		bottom: 10px;
+	}
+	.noteTitle::before {
+		min-width: 100%;
+	}
+}
+
+@media all and (max-width: 438px) {
+	.task-element {
+		max-width: 220px;
+	}
+}

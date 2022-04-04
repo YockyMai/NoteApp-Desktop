@@ -9,6 +9,7 @@ import { RootState } from '../../redux/reducers';
 import axios from 'axios';
 import { onSaveNote } from '../../actions/notes';
 import Link from 'next/link';
+import { auth } from '../../actions/user';
 
 interface editorProps {
 	id?: number;
@@ -17,6 +18,10 @@ interface editorProps {
 const NoteEditor: FC<editorProps> = ({}) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
+
+	React.useEffect(() => {
+		dispatch(auth());
+	}, []);
 
 	const id = router.query.id;
 
@@ -31,10 +36,10 @@ const NoteEditor: FC<editorProps> = ({}) => {
 	console.log(dataNoteEl);
 
 	const [titleValue, setTitleValue] = React.useState(
-		dataNoteEl ? dataNoteEl.title : 'Title',
+		dataNoteEl ? dataNoteEl.title : '',
 	);
 	const [noteValue, setNoteValue] = React.useState(
-		dataNoteEl ? dataNoteEl.noteText : 'Type something...',
+		dataNoteEl ? dataNoteEl.noteText : '',
 	);
 	const [color, setColor] = React.useState<string>(
 		dataNoteEl ? dataNoteEl.color : '#929292',
@@ -65,6 +70,7 @@ const NoteEditor: FC<editorProps> = ({}) => {
 					/>
 				</div>
 				<textarea
+					placeholder="Type something..."
 					className="noteContent"
 					value={noteValue}
 					onChange={onChangeNoteValue}
@@ -85,14 +91,18 @@ const NoteEditor: FC<editorProps> = ({}) => {
 						<a>
 							<button
 								className="saveNoteBtn"
-								onClick={() => {
+								onClick={async () => {
 									dispatch(
 										onSaveNote(
 											username,
 											id as string,
-											titleValue,
+											titleValue == ''
+												? 'Title'
+												: titleValue,
 											color,
-											noteValue,
+											noteValue == ''
+												? 'Type something...'
+												: noteValue,
 										),
 									);
 								}}>
