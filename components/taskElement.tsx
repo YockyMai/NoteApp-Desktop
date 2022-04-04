@@ -1,6 +1,3 @@
-import Image from 'next/image';
-import deleteIcon from '../public/images/delete.svg';
-import linkIcon from '../public/images/link.svg';
 import React, { FC, useState } from 'react';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,8 +53,8 @@ const TaskElement: FC<taskProps> = ({ color, title, id }) => {
 							fill="#F7F0EA"
 						/>
 						<path
-							fill-rule="evenodd"
-							clip-rule="evenodd"
+							fillRule="evenodd"
+							clipRule="evenodd"
 							d="M9.29468 4.87427H1.79468L1.79468 12.3743H9.29468V4.87427ZM6.29468 7.12427H4.79468V10.1243H6.29468V7.12427Z"
 							fill="#F7F0EA"
 						/>
